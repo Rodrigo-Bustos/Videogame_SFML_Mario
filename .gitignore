@@ -1,3 +1,6 @@
 compile.txt
 .DS_store
 main
+.clangd
+compileText.txt
+SFML-3.0.2/
