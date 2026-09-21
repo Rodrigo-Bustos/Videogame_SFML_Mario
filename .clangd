@@ -1,0 +1,5 @@
+CompileFlags:
+    Add:
+        - -I/opt/homebrew/opt/sfml/include
+        - -I/Users/rodrigobustos/Documents/codigo/SfmlPract/include
+        - -std=c++17
