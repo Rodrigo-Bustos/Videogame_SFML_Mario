@@ -6,10 +6,10 @@ Player::Player(sf::Vector2f position, sf::Vector2f size,
   sprite.setOrigin({spriteRect.size.x / 2.f, spriteRect.size.y / 2.f -8});
 }
 
-void Player::updateMovement() {
+void Player::updateMovement(float dt) {
 
-  movement.movementX(hitbox, state, facingDir);
-  movement.movementY(hitbox, state);
+  movement.movementX(hitbox, state, facingDir, dt);
+  movement.movementY(hitbox, state, dt);
 
   if (movement.isMovingHorizontal()) {
     state = PlayerState::Running;

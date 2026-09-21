@@ -6,14 +6,19 @@
 class Movement {
 public:
   void movementX(sf::Rect<float> &hitbox, PlayerState &state,
-                 Direction &facingDir);
-  void movementY(sf::Rect<float> &hitbox, PlayerState &state);
+                 Direction &facingDir, float dt);
+  void movementY(sf::Rect<float> &hitbox, PlayerState &state, float dt);
   bool isMovingHorizontal();
 
 private:
-  const sf::Vector2f speed = {2, 2};
+  sf::Vector2f speed = {0, 0};
+  const sf::Vector2f maxSpeed = {250,8};
+  const float gravity = 14;
+  const float accel = 12000;
+  float inputDir = 0;
   sf::Vector2f lastPostion;
   bool movingHorizontal;
+  bool isGrounded = 0;
 
 private:
   void collisionsX(sf::Rect<float> &hitbox);

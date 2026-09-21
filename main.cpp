@@ -23,7 +23,7 @@ int main()
         new Wall({static_cast<float>(i),200}, wallSize, wallTexture, wallSpriteRect);
     
 
-    
+    sf::Clock clock;
     while (window.isOpen())
     {
         while (const std::optional event = window.pollEvent())
@@ -31,8 +31,9 @@ int main()
             if (event->is<sf::Event::Closed>())
                 window.close();
         }
+        float deltaTime = clock.restart().asSeconds();
         
-        Mario.updateMovement();
+        Mario.updateMovement(deltaTime);
         Mario.updateAnimation();
         window.clear(sf::Color(146, 144, 255));
 

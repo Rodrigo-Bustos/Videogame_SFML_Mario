@@ -10,7 +10,7 @@ class Player : public GameObject {
 public:
   Player(sf::Vector2f position, sf::Vector2f size, const sf::Texture &texture,
          sf::IntRect spriteRect);
-  void updateMovement();
+  void updateMovement(float dt);
   void updateAnimation();
 
 private:
