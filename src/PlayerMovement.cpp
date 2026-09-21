@@ -1,29 +1,49 @@
 #include <PlayerMovement.hpp>
 #include "PlayerState.hpp"
+#include <iostream>
 
-void Movement::movementX(sf::Rect<float> &hitbox,  PlayerState& state, Direction& facingDir) {
+
+void Movement::movementX(sf::Rect<float> &hitbox,  PlayerState& state, Direction& facingDir, float dt) {
+    inputDir = 0;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
-        hitbox.position.x -= speed.x;
-        facingDir = Direction::Left;
+        inputDir -= 1.f;
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
-        hitbox.position.x += speed.x;
-        facingDir = Direction::Right;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
+        inputDir += 1.f;
     }
+    if (inputDir != 0.f) {
+        // If pressing opposite direction of current movement, turn around instantly
+        if ((inputDir < 0.f && speed.x > 0.f) || (inputDir > 0.f && speed.x < 0.f)) {
+            speed.x = 0.f;
+        }
+
+        speed.x += inputDir  * dt * accel;
+        facingDir = (inputDir < 0.f) ? Direction::Left : Direction::Right;
+    } 
+    else {
+        speed.x = 0.f;
+    }
+
+    if (speed.x > maxSpeed.x)  speed.x = maxSpeed.x;
+    if (speed.x < -maxSpeed.x) speed.x = -maxSpeed.x;
+   
+    hitbox.position.x += speed.x * dt;
     collisionsX(hitbox);
     movingHorizontal = (hitbox.position.x != lastPostion.x) ? 1 : 0;
+
     lastPostion = hitbox.position;
 }
-void Movement::movementY(sf::Rect<float> &hitbox, PlayerState& state) {
+void Movement::movementY(sf::Rect<float> &hitbox, PlayerState& state, float dt) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W) && isGrounded) {
+        speed.y -= 3.5;
+        isGrounded = false;
+    }
+    else {
+        speed.y += gravity*dt;
+    }
     hitbox.position.y += speed.y;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) {
-        hitbox.position.y -= speed.y*2;
-    }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
-    {
-        hitbox.position.y += speed.y;
-    }
     collisionsY(hitbox);
+    if (lastPostion.y < hitbox.position.y) isGrounded = false;
     lastPostion = hitbox.position;
 }
 
@@ -49,6 +69,8 @@ void Movement::collisionsY(sf::Rect<float> &hitbox) {
             }
             else {
                 hitbox.position.y = wall->getPosition().y - hitbox.size.y;
+                speed.y = 0;
+                isGrounded = true;
             }
         }
     }
