@@ -1,4 +1,4 @@
-#include <RunningAnimation.hpp>
+#include <Animations/RunningAnimation.hpp>
 #include <PlayerState.hpp>
 
 RunningAnimation::RunningAnimation()
@@ -13,7 +13,7 @@ void RunningAnimation::reset() {
 
 sf::Rect<int> RunningAnimation::update(){
 
-    if (cicloCorrer == 15) {
+    if (cicloCorrer == 13) {
       index++;
       if (index >= 3) {
         index=0;
