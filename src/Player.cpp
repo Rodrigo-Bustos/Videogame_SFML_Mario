@@ -10,20 +10,12 @@ void Player::updateMovement(float dt) {
 
   movement.movementX(hitbox, state, facingDir, dt);
   movement.movementY(hitbox, state, dt);
+  movement.changeState(state);
 
-  if (movement.isMovingHorizontal()) {
-    state = PlayerState::Running;
-  } else {
-    state = PlayerState::Idle;
-  }
 }
 
 void Player::updateAnimation() {
-  if (state == PlayerState::Running) {
-    animator.setAnimation(&runAnim);
-  } else if (state == PlayerState::Idle) {
-    animator.setAnimation(&idleAnim);
-  }
+  animator.setAnimation(animations[static_cast<int>(state)]);
 
   animator.updateAnimation(this->spriteRect);
 

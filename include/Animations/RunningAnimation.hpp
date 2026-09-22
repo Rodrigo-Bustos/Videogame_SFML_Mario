@@ -1,6 +1,6 @@
 #pragma once
 
-#include <IAnimation.hpp>
+#include <Animations/IAnimation.hpp>
 #include <vector>
 
 class RunningAnimation : public IAnimation {

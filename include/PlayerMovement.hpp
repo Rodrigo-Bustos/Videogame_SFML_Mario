@@ -9,6 +9,7 @@ public:
                  Direction &facingDir, float dt);
   void movementY(sf::Rect<float> &hitbox, PlayerState &state, float dt);
   bool isMovingHorizontal();
+  void changeState(PlayerState& state);
 
 private:
   sf::Vector2f speed = {0, 0};
@@ -17,7 +18,7 @@ private:
   const float accel = 12000;
   float inputDir = 0;
   sf::Vector2f lastPostion;
-  bool movingHorizontal;
+  bool movingHorizontal=0;
   bool isGrounded = 0;
 
 private:

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <IAnimation.hpp>
+#include <Animations/IAnimation.hpp>
 
 class IdleAnimation : public IAnimation {
 public:

@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <IAnimation.hpp>
+#include <Animations/IAnimation.hpp>
 
 class Animator {
 public:

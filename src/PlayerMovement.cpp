@@ -1,7 +1,5 @@
 #include <PlayerMovement.hpp>
 #include "PlayerState.hpp"
-#include <iostream>
-
 
 void Movement::movementX(sf::Rect<float> &hitbox,  PlayerState& state, Direction& facingDir, float dt) {
     inputDir = 0;
@@ -46,6 +44,16 @@ void Movement::movementY(sf::Rect<float> &hitbox, PlayerState& state, float dt) 
     if (lastPostion.y < hitbox.position.y) isGrounded = false;
     lastPostion = hitbox.position;
 }
+void Movement::changeState(PlayerState& state) {
+  if (!isGrounded) {
+    state = PlayerState::Jumping;
+  } else if (!isMovingHorizontal()) {
+    state = PlayerState::Running;
+  }
+  else {
+    state = PlayerState::Idle;
+  }
+}
 
 void Movement::collisionsX(sf::Rect<float> &hitbox) {
     for (Wall* wall : Wall::getS_Wall()) {
@@ -82,7 +90,6 @@ bool Movement::isColliding(sf::Rect<float> &hitbox, Wall &wall) const{
     return horizontalCollision && verticalCollision;
 }
 
-bool Movement::isMovingHorizontal()
-{
+bool Movement::isMovingHorizontal() {
     return movingHorizontal;
 }
