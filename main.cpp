@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include "Player.hpp"
+#include "Player/Player.hpp"
 #include "Wall.hpp"
  
 int main()

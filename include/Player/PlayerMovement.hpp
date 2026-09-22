@@ -1,6 +1,6 @@
 #pragma once
 #include "Wall.hpp"
-#include <PlayerState.hpp>
+#include <Player/PlayerState.hpp>
 #include <SFML/Graphics.hpp>
 
 class Movement {

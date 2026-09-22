@@ -1,4 +1,4 @@
-#include <Animations/JumpAnimation.hpp>
+#include <PlayerAnimations/JumpAnimation.hpp>
 
 sf::Rect<int> JumpAnimation::update() {
     return {{96,8},{16,16}};

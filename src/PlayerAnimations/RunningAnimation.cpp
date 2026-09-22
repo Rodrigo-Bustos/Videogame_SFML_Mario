@@ -1,5 +1,5 @@
-#include <Animations/RunningAnimation.hpp>
-#include <PlayerState.hpp>
+#include <PlayerAnimations/RunningAnimation.hpp>
+#include <Player/PlayerState.hpp>
 
 RunningAnimation::RunningAnimation()
 : index(1){

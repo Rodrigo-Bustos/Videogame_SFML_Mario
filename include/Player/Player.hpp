@@ -1,12 +1,12 @@
 #pragma once
-#include "Animations/IAnimation.hpp"
-#include "Animations/JumpAnimation.hpp"
+#include "IAnimation.hpp"
+#include "PlayerAnimations/JumpAnimation.hpp"
 #include "Animator.hpp"
 #include "GameObject.hpp"
-#include <PlayerMovement.hpp>
-#include <PlayerState.hpp>
-#include <Animations/RunningAnimation.hpp>
-#include <Animations/IdleAnimation.hpp>
+#include <Player/PlayerMovement.hpp>
+#include <Player/PlayerState.hpp>
+#include <PlayerAnimations/RunningAnimation.hpp>
+#include <PlayerAnimations/IdleAnimation.hpp>
 #include <vector>
 
 class Player : public GameObject {

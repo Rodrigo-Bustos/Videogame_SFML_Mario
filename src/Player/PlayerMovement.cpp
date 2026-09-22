@@ -1,5 +1,5 @@
-#include <PlayerMovement.hpp>
-#include "PlayerState.hpp"
+#include <Player/PlayerMovement.hpp>
+#include "Player/PlayerState.hpp"
 
 void Movement::movementX(sf::Rect<float> &hitbox,  PlayerState& state, Direction& facingDir, float dt) {
     inputDir = 0;

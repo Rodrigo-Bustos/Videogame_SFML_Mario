@@ -1,4 +1,4 @@
-#include <Player.hpp>
+#include <Player/Player.hpp>
 
 Player::Player(sf::Vector2f position, sf::Vector2f size,
                const sf::Texture &texture, sf::IntRect spriteRect)

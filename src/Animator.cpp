@@ -1,5 +1,5 @@
 #include "Animator.hpp"
-#include <Animations/RunningAnimation.hpp>
+#include <PlayerAnimations/RunningAnimation.hpp>
 
 
 void Animator::setAnimation(IAnimation* newAnimation) {

@@ -1,4 +1,4 @@
-#include <Animations/IdleAnimation.hpp>
+#include <PlayerAnimations/IdleAnimation.hpp>
 
 sf::Rect<int> IdleAnimation::update()
 {
