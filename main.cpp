@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "Player/Player.hpp"
+#include <TextureManager.hpp>
 #include "Wall.hpp"
  
 int main()
@@ -7,20 +8,30 @@ int main()
     // Create the main window
     sf::RenderWindow window(sf::VideoMode({800, 800}), "Danilito ugu");
     window.setFramerateLimit(120);
-    
 
-    sf::Texture playerTexture("assets/Mario.png");
+    TextureManager textureManager;
+    textureManager.loadTexture("Mario", "assets/Mario.png");
+    textureManager.loadTexture("Wall", "assets/wallTexture.png");
+    
     sf::Vector2f playerStartingPos = {100.f, 70.f};
     sf::Vector2f playerSize = {16.f, 16.f};
     sf::IntRect playerSpriteRect = {{0,88},{16,16}};
-    Player Mario(playerStartingPos, playerSize, playerTexture, playerSpriteRect);
 
-    sf::Texture wallTexture("assets/wallTexture.png"); 
+    Player Mario(
+        playerStartingPos, 
+        playerSize, 
+        textureManager.getTexture("Mario"), 
+        playerSpriteRect);
+
+
     sf::IntRect wallSpriteRect = {{0,88},{16,16}};
     sf::Vector2f wallSize = {16.f, 16.f};
     
     for (int i = 0 ; i <= 800; i += 16)
-        new Wall({static_cast<float>(i),200}, wallSize, wallTexture, wallSpriteRect);
+        new Wall({static_cast<float>(i),200}, 
+    wallSize, 
+    textureManager.getTexture("Wall"), 
+    wallSpriteRect);
     
 
     sf::Clock clock;
