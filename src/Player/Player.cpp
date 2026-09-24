@@ -3,7 +3,6 @@
 Player::Player(sf::Vector2f position, sf::Vector2f size,
                const sf::Texture &texture, sf::IntRect spriteRect)
     : GameObject(position, size, texture, spriteRect) {
-  sprite.setOrigin({spriteRect.size.x / 2.f, spriteRect.size.y / 2.f -8});
 }
 
 void Player::updateMovement(float dt) {
@@ -24,4 +23,5 @@ void Player::updateAnimation() {
   } else {
     sprite.setScale({1.f, 1.f});
   }
+
 }
