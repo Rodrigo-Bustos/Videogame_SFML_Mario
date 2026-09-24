@@ -1,7 +1,7 @@
 #include <Player/PlayerMovement.hpp>
 #include "Player/PlayerState.hpp"
 
-void Movement::movementX(sf::Rect<float> &hitbox,  PlayerState& state, Direction& facingDir, float dt) {
+void PlayerMovement::movementX(sf::Rect<float> &hitbox,  PlayerState& state, Direction& facingDir, float dt) {
     inputDir = 0;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
         inputDir -= 1.f;
@@ -27,11 +27,11 @@ void Movement::movementX(sf::Rect<float> &hitbox,  PlayerState& state, Direction
    
     hitbox.position.x += speed.x * dt;
     collisionsX(hitbox);
-    movingHorizontal = (hitbox.position.x != lastPostion.x) ? 1 : 0;
+    movingHorizontal = (hitbox.position.x != lastPosition.x) ? true : false;
 
-    lastPostion = hitbox.position;
+    lastPosition = hitbox.position;
 }
-void Movement::movementY(sf::Rect<float> &hitbox, PlayerState& state, float dt) {
+void PlayerMovement::movementY(sf::Rect<float> &hitbox, PlayerState& state, float dt) {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W) && isGrounded) {
         speed.y -= 3.5;
         isGrounded = false;
@@ -41,10 +41,10 @@ void Movement::movementY(sf::Rect<float> &hitbox, PlayerState& state, float dt) 
     }
     hitbox.position.y += speed.y;
     collisionsY(hitbox);
-    if (lastPostion.y < hitbox.position.y) isGrounded = false;
-    lastPostion = hitbox.position;
+    if (lastPosition.y < hitbox.position.y) isGrounded = false;
+    lastPosition = hitbox.position;
 }
-void Movement::changeState(PlayerState& state) {
+void PlayerMovement::changeState(PlayerState& state) {
   if (!isGrounded) {
     state = PlayerState::Jumping;
   } else if (!isMovingHorizontal()) {
@@ -55,10 +55,10 @@ void Movement::changeState(PlayerState& state) {
   }
 }
 
-void Movement::collisionsX(sf::Rect<float> &hitbox) {
+void PlayerMovement::collisionsX(sf::Rect<float> &hitbox) {
     for (Wall* wall : Wall::getS_Wall()) {
         if (isColliding(hitbox, *wall)){
-            bool movingToRight = hitbox.position.x > lastPostion.x;
+            bool movingToRight = hitbox.position.x > lastPosition.x;
             if (movingToRight) {
                 hitbox.position.x = wall->getPosition().x - hitbox.size.x;
             }
@@ -68,10 +68,10 @@ void Movement::collisionsX(sf::Rect<float> &hitbox) {
         }
     }
 }
-void Movement::collisionsY(sf::Rect<float> &hitbox) {
+void PlayerMovement::collisionsY(sf::Rect<float> &hitbox) {
     for (Wall* wall : Wall::getS_Wall()) {
         if (isColliding(hitbox, *wall)){
-            bool movingUp = hitbox.position.y < lastPostion.y;
+            bool movingUp = hitbox.position.y < lastPosition.y;
             if (movingUp) {
                 hitbox.position.y = wall->getPosition().y + wall->getSize().y;
             }
@@ -82,14 +82,15 @@ void Movement::collisionsY(sf::Rect<float> &hitbox) {
             }
         }
     }
+    
 }
 
-bool Movement::isColliding(sf::Rect<float> &hitbox, Wall &wall) const{
+bool PlayerMovement::isColliding(sf::Rect<float> &hitbox, Wall &wall) const{
     bool horizontalCollision = (hitbox.position.x + hitbox.size.x > wall.getPosition().x && hitbox.position.x < wall.getPosition().x + wall.getSize().x);
     bool verticalCollision = (hitbox.position.y < wall.getPosition().y + wall.getSize().y && hitbox.position.y +  hitbox.size.y > wall.getPosition().y);
     return horizontalCollision && verticalCollision;
 }
 
-bool Movement::isMovingHorizontal() {
+bool PlayerMovement::isMovingHorizontal() {
     return movingHorizontal;
 }

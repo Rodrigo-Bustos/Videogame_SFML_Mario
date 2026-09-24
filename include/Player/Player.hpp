@@ -3,6 +3,7 @@
 #include "PlayerAnimations/JumpAnimation.hpp"
 #include "Animator.hpp"
 #include "GameObject.hpp"
+#include <GlobalEnums.hpp>
 #include <Player/PlayerMovement.hpp>
 #include <Player/PlayerState.hpp>
 #include <PlayerAnimations/RunningAnimation.hpp>
@@ -18,7 +19,7 @@ public:
 
 private:
   Animator animator;
-  Movement movement;
+  PlayerMovement movement;
 
   PlayerState state = PlayerState::Idle;
   Direction facingDir = Direction::Right;

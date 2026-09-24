@@ -1,8 +1,17 @@
 #include "GameObject.hpp"
 
-void GameObject::render(sf::RenderWindow &window) {
+void GameObject::render(sf::RenderWindow& window)
+{
     sprite.setTextureRect(spriteRect);
-    sprite.setPosition(hitbox.position);
+
+        sf::FloatRect bounds = sprite.getLocalBounds();
+
+    sprite.setOrigin({
+        bounds.size.x / 2.f,
+        bounds.size.y / 2.f
+    });
+    sprite.setPosition(hitbox.getCenter());
+
     window.draw(sprite);
 }
 GameObject::GameObject(sf::Vector2f position, sf::Vector2f size, const sf::Texture& texture, sf::IntRect spriteRect)
