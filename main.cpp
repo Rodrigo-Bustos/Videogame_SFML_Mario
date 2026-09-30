@@ -3,6 +3,7 @@
 #include <Enemies/Goomba.hpp>
 #include <SFML/Graphics.hpp>
 #include <TextureManager.hpp>
+#include <memory>
 
 int main() {
   // Create the main window
@@ -17,9 +18,9 @@ int main() {
   sf::Vector2f playerStartingPos = {100.f, 70.f};
   sf::Vector2f playerSize = {16.f, 16.f};
   sf::IntRect playerSpriteRect = {{0, 88}, {16, 16}};
-
-  Player Mario(playerStartingPos, playerSize,
+  auto Mario = std::make_unique<Player>(playerStartingPos, playerSize,
                textureManager.getTexture("Mario"), playerSpriteRect);
+
 
   sf::IntRect wallSpriteRect = {{0, 16}, {16, 16}};
   sf::Vector2f wallSize = {16.f, 16.f};
@@ -30,14 +31,16 @@ int main() {
   }
 
   for (int j = 404; j <=404; j += 16) {
-    for (int i = 84; i <= 84; i += 16)
+    for (int i = 84; i <= 400; i += 316)
       new Wall({static_cast<float>(i), static_cast<float>(j)}, wallSize,
                textureManager.getTexture("TileSet"), wallSpriteRect);
   }
-
-  Goomba *Goomba1 =
-      new Goomba({300, 300}, {16.f, 16.f}, textureManager.getTexture("Enemies"),
-                 {{0, 16}, {16, 16}});
+std::unique_ptr<Goomba> Goomba1 = std::make_unique<Goomba>(
+    sf::Vector2f{300, 300}, 
+    sf::Vector2f{16.f, 16.f}, 
+    textureManager.getTexture("Enemies"), 
+    wallSpriteRect
+);
 
   sf::Clock clock;
   while (window.isOpen()) {
@@ -47,12 +50,12 @@ int main() {
     }
     float deltaTime = clock.restart().asSeconds();
 
-    Mario.updateMovement(deltaTime);
-    Mario.updateAnimation();
+    Mario->updateMovement(deltaTime);
+    Mario->updateAnimation();
     Goomba1->checkIfAlive(deltaTime);
     window.clear(sf::Color(146, 144, 255));
 
-    Mario.render(window);
+    Mario->render(window);
     Goomba1->render(window);
 
     for (auto &wall : Wall::getS_Wall()) {

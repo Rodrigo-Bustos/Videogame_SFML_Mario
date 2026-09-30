@@ -2,7 +2,8 @@
 #include <Player/PlayerState.hpp>
 
 RunningAnimation::RunningAnimation()
-: index(1){
+ {
+    index= 1;
     frames = {{{20,8},{16,16}},{{38,8},{16,16}},{{56,8},{16,16}}};
 }
 
@@ -15,7 +16,7 @@ sf::Rect<int> RunningAnimation::update(){
 
     if (cicloCorrer == 13) {
       index++;
-      if (index >= 3) {
+      if (index >= frames.size()) {
         index=0;
       }
       cicloCorrer = 0;
