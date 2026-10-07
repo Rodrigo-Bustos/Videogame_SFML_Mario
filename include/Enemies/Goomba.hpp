@@ -1,5 +1,6 @@
 #pragma once
 #include "Enemies/GoombaMovement.hpp"
+#include "EnemiesAnimations/GoombaMovingAnimation.hpp"
 #include <Enemies/IEnemy.hpp>
 #include <Player/Player.hpp>
 
@@ -12,4 +13,6 @@ public:
     ~Goomba() = default;
 protected:
     GoombaMovement movement;
+    GoombaMovingAnimation movingAnim;
+    
 };

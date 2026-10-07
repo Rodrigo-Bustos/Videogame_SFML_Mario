@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <vector>
 
 class IAnimation{
 public:
@@ -7,5 +8,7 @@ public:
     virtual void reset() = 0;
     virtual ~IAnimation() = default;
 protected:
+std::vector<sf::IntRect> frames;
+int index;
 
 };

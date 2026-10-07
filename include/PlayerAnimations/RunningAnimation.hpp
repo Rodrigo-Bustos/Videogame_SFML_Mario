@@ -1,6 +1,5 @@
 #pragma once
 #include <IAnimation.hpp>
-#include <vector>
 
 class RunningAnimation : public IAnimation {
 public:
@@ -11,6 +10,4 @@ public:
   
 protected:
   unsigned int cicloCorrer;
-  std::vector<sf::Rect<int>> frames;
-  unsigned int index;
 };

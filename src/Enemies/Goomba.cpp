@@ -20,8 +20,8 @@ void Goomba::checkIfAlive(float dt) {
     else {
         return;
     }
-    // animator.setAnimation(IAnimation *newAnimation) 
-    // animator.updateAnimation(sf::Rect<int> &spriteRec)
+    animator.setAnimation(&movingAnim);
+    animator.updateAnimation(spriteRect);
 }
 
 void Goomba::wasSteppedOn() {
